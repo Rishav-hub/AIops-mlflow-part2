@@ -1,7 +1,7 @@
 name: sample demo
 conda_env: conda.yaml
 
-entry_point:
+entry_points:
     main:
         parameters:
             param1: {type: int, default: 1}
