@@ -4,3 +4,9 @@ Export environment to conda.yaml
 conda env export > conda.yaml
 ```
 
+Run mlflow in current directory
+You need the conda.yaml file and MLproject file
+```bash
+mlflow run .
+```
+
