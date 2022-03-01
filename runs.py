@@ -2,8 +2,8 @@ import os
 import mlflow
 import numpy as np
 
-alphas = np.linspace(0.1,1.0, 5)
-l1_ratios = np.linspace(0.1,1.0, 5)
+alphas = np.linspace(0.1,0.5, 2)
+l1_ratios = np.linspace(0.1,0.5, 2)
 
 
 for p1 in alphas:

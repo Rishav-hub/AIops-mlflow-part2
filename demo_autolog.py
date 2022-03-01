@@ -34,22 +34,18 @@ def main(alpha, l1_ratio):
 
     train_y = train[[TARGET]]
     test_y = test[[TARGET]]
-    
-    with mlflow.start_run():
-        lr_model = ElasticNet(alpha=alpha, l1_ratio=l1_ratio, random_state=42)
-        lr_model.fit(train_x, train_y)
-        pred = lr_model.predict(test_x)
-        rmse, mae, r2 = evaluate(test_y, pred)
-        mlflow.log_param("alpha", alpha)
-        mlflow.log_param("l1_ratio", l1_ratio)
-        mlflow.log_metric("rmse", rmse)
-        mlflow.log_metric("mae", mae)
-        mlflow.log_metric("r2", r2)
 
-        print(f"params- alpha: {alpha}, l1_ratio: {l1_ratio}")
-        print(f"eval metrics - rmse: {rmse}, mae: {mae}, r2: {r2}")
 
-        mlflow.sklearn.log_model(lr_model, "model")
+    mlflow.sklearn.autolog()
+    lr_model = ElasticNet(alpha=alpha, l1_ratio=l1_ratio, random_state=42)
+    lr_model.fit(train_x, train_y)
+    pred = lr_model.predict(test_x)
+    rmse, mae, r2 = evaluate(test_y, pred)
+
+    print(f"params- alpha: {alpha}, l1_ratio: {l1_ratio}")
+    print(f"eval metrics - rmse: {rmse}, mae: {mae}, r2: {r2}")
+
+    mlflow.sklearn.log_model(lr_model, "model")
 
 
 if __name__ == '__main__':
